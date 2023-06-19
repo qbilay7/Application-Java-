@@ -1,0 +1,32 @@
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import java.awt.GridLayout;
+
+public class thread4 extends Thread {
+    private JLabel lbl1, lbl2, lbl3;
+    private JFrame frm;
+
+    public thread4() {
+        frm = new JFrame();
+        frm.setSize(500, 500);
+        frm.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frm.setVisible(true);
+        frm.setLayout(new GridLayout(2, 3));
+        lbl1 = new JLabel("Diet Plan for heavy: ");
+        lbl2 = new JLabel("Workout Plan for heavy: ");
+        lbl3 = new JLabel("Other plans:");
+        frm.add(lbl1);
+        frm.add(lbl2);
+        frm.add(lbl3);
+    }
+
+    @Override
+    public void run() {
+        new thread4();
+        try {
+            thread4.sleep(5000);
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+    }
+}
