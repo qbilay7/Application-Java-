@@ -1,0 +1,93 @@
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+import javax.swing.JTextField;
+import java.lang.Exception;
+import java.awt.event.ActionListener;
+import java.io.Serializable;
+import java.awt.event.ActionEvent;
+import java.awt.GridLayout;
+
+class App extends JFrame implements ActionListener, Serializable {
+    private String name, gender;
+    private double height, weight;
+    private JLabel l1, l2, l3, l4;
+    private JButton submit;
+    private JTextField t1, t2, t3, t4;
+
+    public App() {
+        this.name = null;
+        this.gender = null;
+        this.height = 0.0;
+        this.weight = 0.0;
+
+        setSize(500, 500);
+        setVisible(true);
+        setTitle("Log In");
+        setDefaultCloseOperation(EXIT_ON_CLOSE);
+        setLayout(new GridLayout(5, 2));
+        init();
+
+    }
+
+    public static void main(String[] args) {
+        new App();
+    }
+
+    private void init() {
+        l1 = new JLabel("Enter your name: ");
+        t1 = new JTextField();
+        t1.setSize(10, 100);
+        l2 = new JLabel("Enter your gender(male or female): ");
+        t2 = new JTextField();
+        t2.setSize(10, 100);
+        l3 = new JLabel("Enter your height(cm): ");
+        t3 = new JTextField();
+        t3.setSize(10, 100);
+        l4 = new JLabel("Enter your weight(kg): ");
+        t4 = new JTextField();
+        t4.setSize(10, 100);
+        submit = new JButton("Submit");
+        add(l1);
+        add(t1);
+        add(l2);
+        add(t2);
+        add(l3);
+        add(t3);
+        add(l4);
+        add(t4);
+        submit.addActionListener(this);
+        add(submit);
+    }
+
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        if (e.getSource() == submit) {
+            try {
+                name = t1.getText();
+                gender = t2.getText();
+                height = Double.parseDouble(t3.getText());
+                weight = Double.parseDouble(t4.getText());
+                int x = JOptionPane.showConfirmDialog(null,
+                        "Name: " + name + ", Gender: " + gender + ", Height: " + height + ", Weight: " + weight,
+                        "Confirm?", JOptionPane.YES_NO_OPTION);
+                if (x == 0) {
+                    JOptionPane.showMessageDialog(null, "Welcome " + name + ", let's get started!",
+                            "Successfully Submitted", JOptionPane.PLAIN_MESSAGE);
+                    dispose();
+                    Page1 p = new Page1();
+
+                }
+
+                else
+                    JOptionPane.showMessageDialog(null, "Try again", "Reply", JOptionPane.INFORMATION_MESSAGE);
+            } catch (Exception exception) {
+                JOptionPane.showMessageDialog(null, "Please enter valid info", "Invalid Info",
+                        JOptionPane.ERROR_MESSAGE);
+
+            }
+        }
+
+    }
+}
