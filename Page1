@@ -1,0 +1,75 @@
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+
+import java.awt.FlowLayout;
+
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
+
+class Page1 extends JFrame implements ActionListener {
+    private JButton b1, b2, b3;
+    private JLabel l1;
+    private JPanel p1;
+
+    public Page1() {
+        setSize(500, 500);
+        setVisible(true);
+        setTitle("Choose");
+        setDefaultCloseOperation(EXIT_ON_CLOSE);
+        setLayout(new FlowLayout());
+        p1 = new JPanel();
+        p1.setSize(500, 300);
+        p1.setLayout(new FlowLayout());
+        p1.setVisible(true);
+        b1 = new JButton("Skinny");
+        b2 = new JButton("Middle Muscular");
+        b3 = new JButton("Heavy Muscular");
+        l1 = new JLabel("Choose your purpose: ");
+        b1.addActionListener(this);
+        b2.addActionListener(this);
+        b3.addActionListener(this);
+        p1.add(b1);
+        p1.add(b2);
+        p1.add(b3);
+        add(l1);
+        add(p1);
+
+    }
+
+    public static void main(String[] args) {
+        new Page1();
+    }
+
+    public void actionPerformed(ActionEvent e) {
+        if (e.getSource() == b1) {
+            dispose();
+            thread1 t = new thread1();
+
+            t.start();
+            try {
+                t.sleep(5000);
+            } catch (Exception dt) {
+                System.out.println(dt.getMessage());
+            }
+            thread2 t2 = new thread2();
+            t2.start();
+
+        } else if (e.getSource() == b2) {
+            dispose();
+            thread1 t = new thread1();
+            t.start();
+            thread3 t3 = new thread3();
+            t3.start();
+
+        } else if (e.getSource() == b3) {
+            dispose();
+            thread1 t = new thread1();
+            t.start();
+            thread4 t4 = new thread4();
+            t4.start();
+        }
+    }
+
+}
